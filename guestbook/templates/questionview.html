@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<form method="POST" action="/question">
+  <div class="jumbotron text-center">
+{{ form.example }}
+
+    <h1>Start a test</h1>
+
+    {% for q in questions.items %}
+
+    <ul class="list-group">
+
+      <li class="list-group-item" name='que_desc'><a href="subject_test/{{q.sub_id}}">{{q.ques}}</a></li>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="your_answer" id="exampleRadios1" value="ans1">
+        <label class="form-check-label" for="exampleRadios1">
+          {{q.ans1}}
+        </label>
+
+      </div>
+      <br>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="your_answer" id="exampleRadios2" value="ans2">
+        <label class="form-check-label" for="exampleRadios2">
+          {{q.ans2}}
+        </label>
+      </div>
+      <br>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="your_answer" id="exampleRadios2" value="ans3">
+        <label class="form-check-label" for="exampleRadios2">
+          {{q.ans3}}
+        </label>
+      </div>
+      <br>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="your_answer" id="exampleRadios2" value="ans4">
+        <label class="form-check-label" for="exampleRadios2">
+          {{q.ans4}}
+        </label>
+      </div>
+      <br>
+    </ul>
+
+    <hr>
+    {% endfor %}
+
+  </div>
+
+
+
+  <div>
+    {% if questions.has_prev %}
+    <li>
+      <a href="{{ url_for('question', page=questions.prev_num) }}">Previous</a>
+    </li>
+    {% endif %}
+    </br>
+    {% if questions.has_next == True %}
+      {{ form.submit(class="btn btn-outline-info") }}
+    <li>
+      <a href="{{ url_for('question', page=questions.next_num) }}">Next</a>
+    </li>
+    {% else %}
+    <li>You are done hit check result</li>
+    <li>
+      <a href="{{ url_for('home') }}">Check result</a>
+
+    </li>
+    {% endif %}
+  </div>
+</form>
+
+
+
+
+
+{% endblock content %}
